@@ -5,7 +5,12 @@
 const mongoose = require("mongoose");
 
 require("dotenv").config();
-mongoose.connect(process.env.MONGO_URI);
+
+const uri = process.env.MONGO_URI.slice(0, -16);
+//jostain tulle ylimäääräiset 16 merkkiä URI-merkkijonon loppuun...
+
+console.log(uri);
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let Person;
 
 const createAndSavePerson = (done) => {
